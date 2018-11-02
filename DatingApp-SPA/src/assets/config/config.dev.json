@@ -1,0 +1,6 @@
+{
+    "urls":{
+        "apiUrl": "http://localhost:5000/api",
+        "authUrl": "/auth/"
+    }
+}

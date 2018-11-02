@@ -1,0 +1,6 @@
+{
+    "urls":{
+        "apiUrl": "#{apiUrl}",
+        "authUrl": "#{authUrl}"
+    }
+}
