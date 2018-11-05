@@ -33,10 +33,11 @@ namespace DatingApp.API.Controllers
         {
             userForRegisterDto.Username = userForRegisterDto.Username.ToLower();
 
-            if(await _authRepository.UserExists(userForRegisterDto.Username))
+            if (await _authRepository.UserExists(userForRegisterDto.Username))
                 return BadRequest("Username already exists");
 
-            var userToCreate = new User{
+            var userToCreate = new User
+            {
                 Username = userForRegisterDto.Username
             };
 
@@ -50,7 +51,7 @@ namespace DatingApp.API.Controllers
         {
             var userFromDb = await _authRepository.Login(userForLoginDto.Username.ToLower(), userForLoginDto.Password);
 
-            if(userFromDb == null) return Unauthorized();
+            if (userFromDb == null) return Unauthorized();
 
             var claims = new[]{
                 new Claim(ClaimTypes.NameIdentifier, userFromDb.Id.ToString()),
@@ -62,7 +63,8 @@ namespace DatingApp.API.Controllers
 
             var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
 
-            var tokenDescriptor = new SecurityTokenDescriptor{
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
                 Subject = new ClaimsIdentity(claims),
                 Expires = DateTime.Now.AddDays(1),
                 SigningCredentials = credentials
@@ -72,8 +74,9 @@ namespace DatingApp.API.Controllers
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
 
-            return Ok(new {
-                token= tokenHandler.WriteToken(token)
+            return Ok(new
+            {
+                token = tokenHandler.WriteToken(token)
             });
         }
     }

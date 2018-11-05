@@ -1,14 +1,17 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, APP_INITIALIZER } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { BsDropdownModule } from 'ngx-bootstrap';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { AuthService } from './services/auth.service';
-import { AppConfigService, ConfigFactory } from './_shared/app-config.service';
+import { AppConfigService, AppConfigServiceProvider } from './_shared/app-config.service';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
+import { ErrorInterceptorProvider } from './services/error.interceptor';
+import { AlertifyService } from './services/alertify.service';
 
 @NgModule({
    declarations: [
@@ -20,16 +23,15 @@ import { RegisterComponent } from './register/register.component';
    imports: [
       BrowserModule,
       FormsModule,
-      HttpClientModule
+      HttpClientModule,
+      BsDropdownModule.forRoot()
    ],
    providers: [
        AuthService,
        AppConfigService,
-       {
-           provide: APP_INITIALIZER,
-           useFactory: ConfigFactory,
-           deps: [AppConfigService], multi: true
-       }
+       AppConfigServiceProvider,
+       ErrorInterceptorProvider,
+       AlertifyService
    ],
    bootstrap: [
       AppComponent
