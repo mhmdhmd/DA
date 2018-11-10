@@ -4,7 +4,6 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { User } from "../_models/user";
 
-
 @Injectable()
 export class UserService {
   baseUrl = AppConfigService.settings.urls.apiUrl;
@@ -12,10 +11,14 @@ export class UserService {
   constructor(private http: HttpClient) {}
 
   getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.baseUrl + 'users');
+    return this.http.get<User[]>(this.baseUrl + "users");
   }
 
   getUser(id: number): Observable<User> {
-    return this.http.get<User>(this.baseUrl + 'users/' + id);
-  } 
+    return this.http.get<User>(this.baseUrl + "users/" + id);
+  }
+
+  updateUser(id: number, user: User) {
+    return this.http.put(this.baseUrl + "users/" + id, user);
+  }
 }
