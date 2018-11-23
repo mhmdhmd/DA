@@ -8,7 +8,7 @@ import { AuthService } from "../services/auth.service";
 import { Message } from "../_models/message";
 
 @Injectable()
-export class MessagesResolver implements Resolve<Message[]> {
+export class MessagesResolver implements Resolve<Array<Message>> {
   pageNubmer = 1;
   pageSize = 5;
   messageContainer = "Unread";
@@ -20,7 +20,7 @@ export class MessagesResolver implements Resolve<Message[]> {
     private authService: AuthService
   ) {}
 
-  resolve(route: ActivatedRouteSnapshot): Observable<Message[]> {
+  resolve(route: ActivatedRouteSnapshot): Observable<Array<Message>> {
     return this.userService
       .getMessages(
         this.authService.decodedToken.nameid,
@@ -31,7 +31,7 @@ export class MessagesResolver implements Resolve<Message[]> {
       .pipe(
         catchError(error => {
           this.alertify.error("Problem retrieving messages");
-          this.router.navigate(["/home"]);
+          this.router.navigate(Array("/home"));
           return of(null);
         })
       );

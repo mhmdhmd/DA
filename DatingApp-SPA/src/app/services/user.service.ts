@@ -18,9 +18,9 @@ export class UserService {
     itemsPerPage?,
     userParams?,
     likesParam?
-  ): Observable<PaginatedResult<User[]>> {
-    const paginatedResult: PaginatedResult<User[]> = new PaginatedResult<
-      User[]
+  ): Observable<PaginatedResult<Array<User>>> {
+    const paginatedResult: PaginatedResult<Array<User>> = new PaginatedResult<
+      Array<User>
     >();
 
     let params = new HttpParams();
@@ -45,7 +45,7 @@ export class UserService {
     }
 
     return this.http
-      .get<User[]>(this.baseUrl + "users", { observe: "response", params })
+      .get<Array<User>>(this.baseUrl + "users", { observe: "response", params })
       .pipe(
         map(response => {
           paginatedResult.result = response.body;
@@ -86,9 +86,9 @@ export class UserService {
   }
 
   getMessages(id: number, page?, itemsPerPage?, messageContainer?) {
-    const paginatedResult: PaginatedResult<Message[]> = new PaginatedResult<
-      Message[]
-    >();
+    const paginatedResult: PaginatedResult<
+      Array<Message>
+    > = new PaginatedResult<Array<Message>>();
 
     let params = new HttpParams();
     params = params.append("MessageContainer", messageContainer);
@@ -98,7 +98,7 @@ export class UserService {
     }
 
     return this.http
-      .get<Message[]>(this.baseUrl + "users/" + id + "/messages", {
+      .get<Array<Message>>(this.baseUrl + "users/" + id + "/messages", {
         observe: "response",
         params
       })
@@ -117,7 +117,7 @@ export class UserService {
   }
 
   getMessageThread(id: number, recipientId: number) {
-    return this.http.get<Message[]>(
+    return this.http.get<Array<Message>>(
       this.baseUrl + "users/" + id + "/messages/thread/" + recipientId
     );
   }

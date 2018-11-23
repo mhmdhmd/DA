@@ -35,6 +35,6 @@ export function ConfigFactory(config: AppConfigService) {
 export const AppConfigServiceProvider = {
   provide: APP_INITIALIZER,
   useFactory: ConfigFactory,
-  deps: [AppConfigService],
+  deps: Array(AppConfigService),
   multi: true
 };

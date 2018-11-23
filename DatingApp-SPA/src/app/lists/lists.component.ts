@@ -12,7 +12,7 @@ import { AlertifyService } from "../services/alertify.service";
   styleUrls: ["./lists.component.css"]
 })
 export class ListsComponent implements OnInit {
-  users: User[];
+  users: Array<User>;
   pagination: Pagination;
   likesParam: string;
 
@@ -45,7 +45,7 @@ export class ListsComponent implements OnInit {
         this.likesParam
       )
       .subscribe(
-        (res: PaginatedResult<User[]>) => {
+        (res: PaginatedResult<Array<User>>) => {
           this.users = res.result;
           this.pagination = res.pagination;
         },

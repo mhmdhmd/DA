@@ -11,7 +11,7 @@ import { Pagination, PaginatedResult } from "src/app/_models/Pagination";
   styleUrls: ["./member-list.component.css"]
 })
 export class MemberListComponent implements OnInit {
-  users: User[];
+  users: Array<User>;
   user: User = JSON.parse(localStorage.getItem("user"));
   genderList = [
     { value: "male", display: "Males" },
@@ -58,7 +58,7 @@ export class MemberListComponent implements OnInit {
         this.userParams
       )
       .subscribe(
-        (res: PaginatedResult<User[]>) => {
+        (res: PaginatedResult<Array<User>>) => {
           this.users = res.result;
           this.pagination = res.pagination;
         },

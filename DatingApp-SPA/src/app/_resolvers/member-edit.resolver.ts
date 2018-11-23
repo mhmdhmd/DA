@@ -20,7 +20,7 @@ export class MemberEditResolver implements Resolve<User> {
     return this.userService.getUser(this.authService.decodedToken.nameid).pipe(
       catchError(error => {
         this.alertify.error("Problem retrieving data");
-        this.router.navigate(["/members"]);
+        this.router.navigate(Array("/members"));
         return of(null);
       })
     );

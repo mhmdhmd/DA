@@ -1,5 +1,5 @@
 {
-    "urls":{
-        "apiUrl": "#{apiUrl}"
-    }
+  "urls": {
+    "apiUrl": "api/"
+  }
 }

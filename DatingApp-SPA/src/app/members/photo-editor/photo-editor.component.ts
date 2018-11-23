@@ -13,7 +13,7 @@ import { AlertifyService } from "src/app/services/alertify.service";
 })
 export class PhotoEditorComponent implements OnInit {
   @Input()
-  photos: Photo[];
+  photos: Array<Photo>;
   uploader: FileUploader;
   hasBaseDropZoneOver = false;
   currentMainPhoto: Photo;
@@ -65,7 +65,7 @@ export class PhotoEditorComponent implements OnInit {
         };
 
         this.photos.push(photo);
-        if(photo.isMain){
+        if (photo.isMain) {
           this.authService.changeMemberPhoto(photo.url);
           this.authService.currentUser.photoUrl = photo.url;
           localStorage.setItem(
@@ -97,15 +97,20 @@ export class PhotoEditorComponent implements OnInit {
         }
       );
   }
-  
+
   deletePhoto(id: number) {
-    this.alertify.confirm('Are you sure you want to delete this photo?', () => {
-      this.userService.deletePhoto(this.authService.decodedToken.nameid, id).subscribe(() => {
-        this.photos.splice(this.photos.findIndex(p => p.id === id),1);
-        this.alertify.success('Photo has been deleted');
-      }, error => {
-        this.alertify.error('Failed to delete the photo');
-      });
+    this.alertify.confirm("Are you sure you want to delete this photo?", () => {
+      this.userService
+        .deletePhoto(this.authService.decodedToken.nameid, id)
+        .subscribe(
+          () => {
+            this.photos.splice(this.photos.findIndex(p => p.id === id), 1);
+            this.alertify.success("Photo has been deleted");
+          },
+          error => {
+            this.alertify.error("Failed to delete the photo");
+          }
+        );
     });
   }
 }

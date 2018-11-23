@@ -12,7 +12,7 @@ import { AlertifyService } from "../services/alertify.service";
   styleUrls: ["./messages.component.css"]
 })
 export class MessagesComponent implements OnInit {
-  messages: Message[];
+  messages: Array<Message>;
   pagination: Pagination;
   messageContainer = "Unread";
 
@@ -39,7 +39,7 @@ export class MessagesComponent implements OnInit {
         this.messageContainer
       )
       .subscribe(
-        (res: PaginatedResult<Message[]>) => {
+        (res: PaginatedResult<Array<Message>>) => {
           this.messages = res.result;
           this.pagination = res.pagination;
         },

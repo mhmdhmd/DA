@@ -17,8 +17,8 @@ import { TabsetComponent } from "ngx-bootstrap";
 })
 export class MemberDetailComponent implements OnInit {
   user: User;
-  galleryOptions: NgxGalleryOptions[];
-  galleryImages: NgxGalleryImage[];
+  galleryOptions: Array<NgxGalleryOptions>;
+  galleryImages: Array<NgxGalleryImage>;
   @ViewChild("memberTabs") memberTabs: TabsetComponent;
 
   constructor(
@@ -52,7 +52,7 @@ export class MemberDetailComponent implements OnInit {
   }
 
   getImages() {
-    const imagesUrls = [];
+    const imagesUrls = new Array();
     for (let i = 0; i < this.user.photos.length; i++) {
       imagesUrls.push({
         small: this.user.photos[i].url,

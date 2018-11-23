@@ -12,7 +12,7 @@ import { tap } from "rxjs/operators";
 })
 export class MemberMessagesComponent implements OnInit {
   @Input() recipientId: number;
-  messages: Message[];
+  messages: Array<Message>;
   newMessage: any = {};
 
   constructor(
